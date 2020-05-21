@@ -1,180 +1,205 @@
-import React from 'react'
+import React from 'react';
 import {
-    View,
-    StyleSheet,
-    Text,
-    Image,
-    Dimensions,
-    TextInput,
-    ActivityIndicator
-} from 'react-native'
-import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  Dimensions,
+  TextInput,
+  ActivityIndicator,
+  SafeAreaView,
+  StatusBar
+} from 'react-native';
+import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
 
-import { connect } from 'react-redux'
-import { fetch } from '../api/covid/actions'
+import {connect} from 'react-redux';
+import {fetch} from '../api/covid/actions';
 
 import Moment from 'moment';
-import Card from './components/Card'
-import Prevention from './components/Prevention'
-import Symptoms from './components/Symptoms'
-const {
-    height,
-    width
-} = Dimensions.get('screen')
+import Card from './components/Card';
+import Prevention from './components/Prevention';
+import Symptoms from './components/Symptoms';
+const {height, width} = Dimensions.get('screen');
 
 const mapStateToProps = state => ({
-    items: state.fetch.items,
-    load: state.fetch.loading,
-    error: state.fetch.error,
-    global: state.fetch.global
-})
+  items: state.fetch.items,
+  load: state.fetch.loading,
+  error: state.fetch.error,
+  global: state.fetch.global,
+});
 
 class MainScreen extends React.Component {
-    state = {
-        data: {},
-        text: ''
-    }
-    componentDidMount = async () => {
-        this.props.dispatch(fetch())
-    }
+  state = {
+    data: {},
+    text: '',
+  };
+  componentDidMount = async () => {
+    this.props.dispatch(fetch());
+  };
 
-    render() {
-        const { load, items, global } = this.props
-        Moment.locale('ru')
-        return (
-            <ScrollView>
-                <View style={styles.container}>
-                    <Text style={{
-                        fontSize: 20,
-                        color: '#fff',
-                        zIndex: 200,
-                        fontWeight: 'bold',
-                        top: 16
-                    }}>#STAYATHOME</Text>
-                    <Image
-                        source={require('../img/doctor.png')}
-                        style={styles.img} />
-                    <View style={styles.header} />
-                    <View style={styles.txtInput}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Image
-                                source={require('../img/location.png')}
-                                style={{
-                                    width: 24,
-                                    height: 24,
-                                    tintColor: '#606DAA'
-                                }} />
-                            <TextInput
-                                style={{
-                                    color: '#606DAA'
-                                }}
-                                placeholder={'Kazakhstan'}
-                                value={this.state.text}
-                                onChangeText={(text) => { this.setState({ text }) }}
-                            />
-                        </View>
-                        <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('Screen', { param: this.state.text })}>
-                            <Text style={styles.btnText}>Поиск</Text>
-                        </TouchableOpacity>
-                    </View>
-                    {
-                        load ?
-                            <View style={{
-                                marginTop: 32,
-                                backgroundColor: '#fff',
-                            }}>
-                                <ActivityIndicator size={'large'} color={'#606DAA'} />
-                            </View> :
-
-                            <View style={styles.body}>
-                                <View style={{
-                                    padding: 8
-                                }}>
-                                    <View>
-                                        <Text style={{
-                                            fontSize: 18,
-                                            fontWeight: 'bold',
-                                            color: '#606DAA',
-                                        }}>Дата обновление</Text>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text style={{
-                                                color: '#C4C4C4'
-                                            }}>последнее обновление <Text style={{ color: '#606DAA', }}>{Moment(items.Date).format('ll')}</Text>
-                                            </Text>
-                                            <TouchableOpacity onPress={() => this.props.dispatch(fetch())}>
-                                                <Image source={require('../img/update.png')} style={{
-                                                    width: 24,
-                                                    height: 24,
-                                                    resizeMode: 'contain',
-                                                    marginLeft: 12,
-                                                    tintColor: '#606DAA',
-                                                }} />
-                                            </TouchableOpacity>
-                                        </View>
-                                    </View>
-                                    <Card global={global} />
-                                </View>
-                                <Symptoms />
-                                <Prevention />
-                            </View>
-                    }
+  render() {
+    const {load, items, global} = this.props;
+    Moment.locale('ru');
+    return (
+      <ScrollView>
+          <StatusBar />
+        <View style={styles.container}>
+          <Image source={require('../img/doctor.png')} style={styles.img} />
+          <View style={styles.header} />
+          <Text
+            style={{
+              fontSize: 20,
+              color: '#606DAA',
+              zIndex: 200,
+              fontWeight: 'bold',
+              top: 16,
+              top: height * 0.42,
+              marginBottom:5
+            }}>
+            #STAYATHOME
+          </Text>
+          <View style={styles.txtInput}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Image
+                source={require('../img/location.png')}
+                style={{
+                  width: 24,
+                  height: 24,
+                  tintColor: '#606DAA',
+                }}
+              />
+              <TextInput
+                style={{
+                  color: '#606DAA',
+                }}
+                placeholder={'Kazakhstan'}
+                value={this.state.text}
+                onChangeText={text => {
+                  this.setState({text});
+                }}
+              />
+            </View>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() =>
+                this.props.navigation.navigate('Screen', {
+                  param: this.state.text,
+                })
+              }>
+              <Text style={styles.btnText}>Поиск</Text>
+            </TouchableOpacity>
+          </View>
+          {load ? (
+            <View
+              style={{
+                marginTop: 32,
+                backgroundColor: '#fff',
+              }}>
+              <ActivityIndicator size={'large'} color={'#606DAA'} />
+            </View>
+          ) : (
+            <View style={styles.body}>
+              <View
+                style={{
+                  padding: 8,
+                }}>
+                <View>
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: 'bold',
+                      color: '#606DAA',
+                    }}>
+                    Дата обновление
+                  </Text>
+                  <View style={{flexDirection: 'row'}}>
+                    <Text
+                      style={{
+                        color: '#C4C4C4',
+                      }}>
+                      последнее обновление{' '}
+                      <Text style={{color: '#606DAA'}}>
+                        {Moment(items.Date).format('ll')}
+                      </Text>
+                    </Text>
+                    <TouchableOpacity
+                      onPress={() => this.props.dispatch(fetch())}>
+                      <Image
+                        source={require('../img/update.png')}
+                        style={{
+                          width: 24,
+                          height: 24,
+                          resizeMode: 'contain',
+                          marginLeft: 12,
+                          tintColor: '#606DAA',
+                        }}
+                      />
+                    </TouchableOpacity>
+                  </View>
                 </View>
-            </ScrollView>
-        )
-    }
+                <Card global={global} />
+              </View>
+              <Symptoms />
+              <Prevention />
+            </View>
+          )}
+        </View>
+      </ScrollView>
+    );
+  }
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        // justifyContent:'center',
-        alignItems: 'center',
-    },
-    header: {
-        height: 600,
-        width: 600,
-        borderRadius: 300,
-        backgroundColor: '#606DAA',
-        top: -300,
-        position: 'absolute',
-        zIndex: 99
-    },
-    img: {
-        width: width * 0.8,
-        height: height * 0.4,
-        position: 'absolute',
-        marginTop: 32,
-        zIndex: 100,
-        resizeMode: 'contain'
-    },
-    txtInput: {
-        height: 40,
-        width: width * 0.9,
-        borderRadius: 16,
-        borderWidth: 1,
-        borderColor: '#606DAA',
-        marginTop: height * 0.42,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingRight: 1,
-        paddingLeft: 8,
-    },
-    btn: {
-        height: 36,
-        width: 80,
-        backgroundColor: '#606DAA',
-        borderRadius: 16,
-        justifyContent: 'center'
-    },
-    btnText: {
-        color: '#fff',
-        textAlign: 'center',
-        fontWeight: '700'
-    },
-    body: {
-        flexDirection: 'column',
-        width: width * 0.9,
-    }
-})
-export default connect(mapStateToProps)(MainScreen)
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    // justifyContent:'center',
+    alignItems: 'center',
+  },
+  header: {
+    height: 600,
+    width: 600,
+    borderRadius: 300,
+    backgroundColor: '#606DAA',
+    top: -300,
+    position: 'absolute',
+    zIndex: 99,
+  },
+  img: {
+    width: width * 0.8,
+    height: height * 0.4,
+    position: 'absolute',
+    marginTop: 32,
+    zIndex: 100,
+    resizeMode: 'contain',
+  },
+  txtInput: {
+    height: 40,
+    width: width * 0.9,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#606DAA',
+    marginTop: height * 0.42,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingRight: 1,
+    paddingLeft: 8,
+  },
+  btn: {
+    height: 36,
+    width: 80,
+    backgroundColor: '#606DAA',
+    borderRadius: 16,
+    justifyContent: 'center',
+  },
+  btnText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: '700',
+  },
+  body: {
+    flexDirection: 'column',
+    width: width * 0.9,
+  },
+});
+export default connect(mapStateToProps)(MainScreen);

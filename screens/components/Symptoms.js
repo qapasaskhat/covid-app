@@ -8,7 +8,7 @@ import {
     Dimensions
 } from 'react-native'
 
-const {width,height} = Dimensions.get('screen')
+const { width, height } = Dimensions.get('screen')
 
 const Symptoms = () => {
     return (
@@ -19,7 +19,7 @@ const Symptoms = () => {
                 flexDirection: 'row',
                 justifyContent: 'space-around',
             }}>
-                <View style={ styles.view }>
+                <View style={styles.view}>
                     <Image
                         source={require('../../img/fever.png')}
                         style={styles.imgStyle} />
@@ -46,13 +46,13 @@ const Symptoms = () => {
                 <View style={styles.view}>
                     <Image
                         source={require('../../img/throat.png')}
-                        style={styles.imgStyle}/>
+                        style={styles.imgStyle} />
                     <Text style={styles.txtStyle}>Больное горло</Text>
                 </View>
                 <View style={styles.view}>
                     <Image
                         source={require('../../img/headache.png')}
-                        style={styles.imgStyle}/>
+                        style={styles.imgStyle} />
                     <Text style={styles.txtStyle}>Головная боль</Text>
                 </View>
             </View>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 5
     },
-    txtSymptoms:{
+    txtSymptoms: {
         fontSize: 18,
         fontWeight: 'bold',
         color: 'rgba(0,0,0,0.75)',
@@ -78,21 +78,21 @@ const styles = StyleSheet.create({
         marginBottom: 3,
         color: '#606DAA',
     },
-    imgStyle:{
+    imgStyle: {
         width: 64,
         height: 64,
         resizeMode: 'contain'
     },
-    txtStyle:{
+    txtStyle: {
         fontSize: 14,
-        textAlign:'center'
+        textAlign: 'center'
     },
-    view:{
+    view: {
         alignItems: 'center',
         backgroundColor: '#CBDCF8',
-        padding:5,
+        padding: 5,
         borderRadius: 12,
-        width: width*0.28
+        width: width * 0.28
     }
 })
 export default Symptoms

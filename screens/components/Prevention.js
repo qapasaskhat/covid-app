@@ -14,7 +14,6 @@ const Prevention = () => {
                 borderRadius: 8,
                 marginTop: 8
             }}>
-
                 <View style={styles.view}>
                     <Image
                         source={require('../../img/mask.png')}
@@ -45,8 +44,6 @@ const Prevention = () => {
                         style={styles.imgStyle} />
                     <Text style={styles.txtStyle}>Избегайте людных мест и контактов с больными людьми</Text>
                 </View>
-
-
             </View>
         </View>
     )

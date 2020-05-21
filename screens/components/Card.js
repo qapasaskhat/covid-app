@@ -24,10 +24,11 @@ const Card = ({global}) =>{
             shadowOpacity: 0.25,
             shadowRadius: 3.84,
             elevation: 5,
-            padding: 4,
+            paddingTop: 8,
             backgroundColor: '#fff',
             borderRadius: 5,
-            marginLeft: -12
+            marginLeft: -12,
+            paddingBottom: 8
         }}>
             <View style={{
                 alignItems: 'center'
