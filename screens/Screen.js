@@ -15,6 +15,7 @@ import { search } from '../api/covid/actions'
 
 
 import Moment from 'moment';
+import Card from './components/Card';
 const {
     height,
     width
@@ -103,6 +104,7 @@ class Screen extends React.Component{
                                 последнее обновление <Text style={{color:'#606DAA',}}>{Moment(items.Date).format('ll')}</Text>
                             </Text>
                         </View>
+                        <Card global={data.map((i)=>{return i})} />
                         <View style={{
                             flexDirection:'row',
                             justifyContent:'space-around',
