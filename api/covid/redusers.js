@@ -41,7 +41,7 @@ export default function fetchApi(state = initianState,action){
                 data: state.items.Countries.filter(i=>{
                         const itemData = `${i.Country.toUpperCase()}`
                         const textData = action.text.toUpperCase()
-                        console.log(itemData.indexOf(textData) > -1);
+                       console.log(itemData.indexOf(textData) > -1);
                     return itemData.indexOf(textData) > -1
                 })
             }

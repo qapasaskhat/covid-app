@@ -1,5 +1,7 @@
-import Axios from "axios";
+import axios from "axios";
+
 var translate = require('react-node-google-translate');
+
 export const FETCH_BEGIN = 'FETCH_BEGIN';
 export const FETCH_SUCCESS = 'FETCH_SUCCESS';
 export const FETCH_ERROR = 'FETCH_ERROR';
@@ -24,10 +26,11 @@ export const searchText =(text) =>({
 })
 
 
-export function fetch(){
+export function network(){
     return dispatch=>{
         dispatch(fethBegin())
-        return Axios.get('https://api.covid19api.com/summary')
+        console.log('get axios');
+        return axios.get('https://api.covid19api.com/summary')
         .then(function (response) {
             console.log(response.data)
             dispatch(fetchSuccess(response.data))

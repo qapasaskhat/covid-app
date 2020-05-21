@@ -11,9 +11,11 @@ import {
   StatusBar
 } from 'react-native';
 import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
+import publicIP from 'react-native-public-ip';
 
-import {connect} from 'react-redux';
-import {fetch} from '../api/covid/actions';
+import { connect } from 'react-redux';
+import { network } from '../api/covid/actions';
+import{ fetchLocation } from '../api/location/actions'
 
 import Moment from 'moment';
 import Card from './components/Card';
@@ -26,6 +28,7 @@ const mapStateToProps = state => ({
   load: state.fetch.loading,
   error: state.fetch.error,
   global: state.fetch.global,
+  country_name: state.location.country_name
 });
 
 class MainScreen extends React.Component {
@@ -34,11 +37,14 @@ class MainScreen extends React.Component {
     text: '',
   };
   componentDidMount = async () => {
-    this.props.dispatch(fetch());
+    this.props.dispatch(network());
+    const publicIpAddress = await publicIP();
+    this.props.dispatch(fetchLocation(publicIpAddress))
   };
 
+
   render() {
-    const {load, items, global} = this.props;
+    const {load, items, global, country_name} = this.props;
     Moment.locale('ru');
     return (
       <ScrollView>
@@ -60,14 +66,17 @@ class MainScreen extends React.Component {
           </Text>
           <View style={styles.txtInput}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <TouchableOpacity onPress={()=>this.props.navigation.navigate('Screen', {
+                  param: country_name,
+                })}>
               <Image
                 source={require('../img/location.png')}
                 style={{
                   width: 24,
                   height: 24,
                   tintColor: '#606DAA',
-                }}
-              />
+                }}/>
+              </TouchableOpacity>
               <TextInput
                 style={{
                   color: '#606DAA',

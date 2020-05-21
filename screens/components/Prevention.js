@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         maxWidth: '75%',
         textAlign: 'auto',
         fontSize: 16,
-        marginLeft: 5,
+        marginLeft: 8,
         //color: '#fff',
         fontWeight: '600'
     },
