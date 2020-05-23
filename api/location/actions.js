@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 
 export const LOCATION_BEGIN = 'LOCATION_BEGIN';
 export const LOCATION_SUCCESS = 'LOCATION_SUCCESS';
@@ -21,7 +21,12 @@ export const locationError = error => ({
 export function fetchLocation(ip) {
   return dispatch => {
     dispatch(locationBegin());
-    return Axios.get(`http://api.ipstack.com/${ip}?access_key=${ACCESS_KEY}`)
+    const request = axios({
+      method: 'GET',
+      url: `http://api.ipstack.com/${ip}?access_key=${ACCESS_KEY}`,
+      headers: []
+    })
+    return request
       .then(function(response) {
         //console.log(response.data)
         dispatch(locationSuccess(response.data));

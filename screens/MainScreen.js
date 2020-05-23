@@ -45,7 +45,7 @@ class MainScreen extends React.Component {
 
   render() {
     const {load, items, global, country_name} = this.props;
-    Moment.locale('ru');
+
     return (
       <ScrollView>
           <StatusBar />
@@ -132,7 +132,7 @@ class MainScreen extends React.Component {
                       </Text>
                     </Text>
                     <TouchableOpacity
-                      onPress={() => this.props.dispatch(fetch())}>
+                      onPress={() => this.props.dispatch(network())}>
                       <Image
                         source={require('../img/update.png')}
                         style={{
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     borderColor: '#606DAA',
-    marginTop: height * 0.42,
+    marginTop: height * 0.44,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

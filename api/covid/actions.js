@@ -29,8 +29,13 @@ export const searchText =(text) =>({
 export function network(){
     return dispatch=>{
         dispatch(fethBegin())
-        console.log('get axios');
-        return axios.get('https://api.covid19api.com/summary')
+        //url = 'https://api.covid19api.com/summary'
+        const request = axios({
+            method: 'GET',
+            url: 'https://api.covid19api.com/summary',
+            headers: []
+        })
+        return request
         .then(function (response) {
             console.log(response.data)
             dispatch(fetchSuccess(response.data))
