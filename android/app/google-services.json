@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "14681747017",
+    "firebase_url": "https://rncovidapp.firebaseio.com",
+    "project_id": "rncovidapp",
+    "storage_bucket": "rncovidapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14681747017:android:6c108e4196b747ea465998",
+        "android_client_info": {
+          "package_name": "com.covidapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14681747017-vrk7j75mnpr3r361ir88jk468fl0nlds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5p5FHMSI4_48VtqdTDQXRulRGari3vX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14681747017-vrk7j75mnpr3r361ir88jk468fl0nlds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

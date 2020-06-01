@@ -37,7 +37,7 @@ export function network(){
         })
         return request
         .then(function (response) {
-            console.log(response.data)
+            //console.log(response.data)
             dispatch(fetchSuccess(response.data))
         })
         .catch(function (error) {
