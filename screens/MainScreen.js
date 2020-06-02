@@ -46,7 +46,7 @@ class MainScreen extends React.Component {
     this.props.dispatch(network());
     const publicIpAddress = await publicIP();
     this.props.dispatch(fetchLocation(publicIpAddress))
-
+    useEffect()
     fcmService.registerAppWithFCM()
     fcmService.register(onRegister, onNotification, onOpenNotification)
     localNotificationService.configure(onOpenNotification)
